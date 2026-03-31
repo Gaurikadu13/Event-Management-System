@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login — Techcult | Prof Ram Meghe College</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <a href="index.html" class="back-home">
+    <i class="fa-solid fa-arrow-left"></i> Back to Home
+  </a>
+  <div style="position:fixed;top:22px;right:24px;z-index:100">
+    <div class="dm-btn" onclick="toggleDark()">
+      <i class="fa-solid fa-moon" id="dm-icon-login"></i>
+    </div>
+  </div>
+
+  <div class="login-page">
+    <div class="login-bg"></div>
+    <div class="login-grid-overlay"></div>
+    <div class="orb orb-p" style="width:500px;height:500px;top:-100px;left:-100px;opacity:0.5;filter:blur(80px)"></div>
+    <div class="orb orb-k" style="width:400px;height:400px;bottom:-80px;right:-80px;opacity:0.4;filter:blur(80px)"></div>
+
+    <div class="login-card">
+      <div class="login-logo-wrap">
+        <div class="login-logo-ico"><i class="fa-solid fa-bolt-lightning"></i></div>
+        <h2>Tech<span>cult</span></h2>
+        <p>Prof Ram Meghe College of Engineering and Management, Badnera</p>
+      </div>
+      <div class="login-divider"><span>Sign in to your portal</span></div>
+      <div class="login-hint">
+        <i class="fa-solid fa-circle-info"></i>
+        <p>Use any email + any password to login.<br/>
+        <em style="font-size:0.72rem;opacity:0.75">Each login email is treated as a separate account.</em></p>
+      </div>
+      <div class="form-field">
+        <label>Email Address</label>
+        <input type="email" id="login-email" placeholder="you@prmceam.ac.in" autocomplete="email"/>
+        <i class="fa-solid fa-envelope field-icon"></i>
+      </div>
+      <div class="form-field">
+        <label>Password</label>
+        <input type="password" id="login-pwd" placeholder="Enter your password" autocomplete="current-password"/>
+        <i class="fa-solid fa-eye field-icon" id="pwd-toggle" onclick="togglePwd()"></i>
+      </div>
+      <div class="login-options">
+        <label class="remember"><input type="checkbox" checked/> Remember me</label>
+        <span class="forgot">Forgot password?</span>
+      </div>
+      <div class="login-error" id="login-error">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <span id="error-text">Please enter your email and password.</span>
+      </div>
+      <button class="btn-login" id="login-btn" onclick="doLogin()">
+        <i class="fa-solid fa-right-to-bracket"></i>
+        <span>Sign In to Dashboard</span>
+      </button>
+      <p class="login-footer">Don't have an account? <a>Request Access</a></p>
+    </div>
+  </div>
+
+  <div id="toast"><i class="fa-solid fa-circle-check"></i><span id="toast-msg">Done!</span></div>
+
+  <!-- ════ REGISTRATION MODAL ════ -->
+  <div id="reg-modal" onclick="backdropClick(event)">
+    <div class="modal-wrapper">
+      <div class="modal-box">
+        <div class="modal-header-bar"></div>
+        <div class="modal-body">
+          <div class="modal-close" onclick="closeRegModal()"><i class="fa-solid fa-xmark"></i></div>
+          <div class="modal-event-preview">
+            <div class="modal-event-emoji" id="modal-event-emoji">🎉</div>
+            <div class="modal-event-info">
+              <h3 id="modal-event-name">Event Name</h3>
+              <div class="modal-event-meta-item"><i class="fa-solid fa-calendar"></i><span id="modal-event-date">-</span></div>
+              <div class="modal-event-meta-item"><i class="fa-solid fa-clock"></i><span id="modal-event-time">-</span></div>
+              <div class="modal-event-meta-item"><i class="fa-solid fa-location-dot"></i><span id="modal-event-venue">-</span></div>
+              <div class="modal-event-meta-item"><i class="fa-solid fa-trophy"></i><span id="modal-event-prize">-</span></div>
+            </div>
+          </div>
+          <div id="modal-step-1">
+            <div class="modal-step-title">Register for this Event</div>
+            <p class="modal-step-desc">Click <strong>Open Registration Form</strong> to fill your details on Google Form. After submitting, come back and confirm below.</p>
+            <div class="modal-actions">
+              <button class="btn-modal-cancel" onclick="closeRegModal()"><i class="fa-solid fa-xmark"></i> Cancel</button>
+              <button class="btn-grad" onclick="openGoogleForm()"><i class="fa-brands fa-google"></i><span>Open Registration Form</span></button>
+            </div>
+          </div>
+          <div id="modal-step-2" style="display:none">
+            <div class="success-icon">📋</div>
+            <div class="modal-step-title">Did you submit the form?</div>
+            <p class="modal-step-desc">The Google Form opened in a new tab. <strong>Fill and submit it completely</strong>, then click confirm below.</p>
+            <div class="modal-confirm-box">
+              <i class="fa-solid fa-circle-info"></i>
+              <p>Click <strong>"Yes, I Submitted"</strong> only after submitting the Google Form. Otherwise your registration won't be counted.</p>
+            </div>
+            <div class="modal-actions">
+              <button class="btn-modal-cancel" onclick="openGoogleForm()"><i class="fa-solid fa-arrow-left"></i> Go Back to Form</button>
+              <button class="btn-grad" onclick="confirmRegistration()"><i class="fa-solid fa-circle-check"></i><span>Yes, I Submitted</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ LOGIN REQUIRED MODAL ════ -->
+  <div id="login-required-modal" onclick="if(event.target.id==='login-required-modal')closeLoginPopup()">
+    <div class="login-req-box">
+      <div class="login-req-bar"></div>
+      <div class="login-req-body">
+        <div class="login-req-icon">🔐</div>
+        <div class="login-req-title">Login Required</div>
+        <p class="login-req-desc">You need to <strong>login first</strong> before registering for an event. Please sign in to your Techcult account to continue.</p>
+        <div class="login-req-actions">
+          <button class="btn-modal-cancel" onclick="closeLoginPopup()"><i class="fa-solid fa-xmark"></i> Cancel</button>
+          <button class="btn-grad" onclick="goToLogin()"><i class="fa-solid fa-right-to-bracket"></i><span>Login Now</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

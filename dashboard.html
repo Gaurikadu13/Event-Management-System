@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard — Techcult | Prof Ram Meghe College</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <div class="dashboard-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <div class="sidebar-brand-inner">
+          <div class="sidebar-logo-ico"><i class="fa-solid fa-bolt-lightning"></i></div>
+          <div>
+            <div class="sidebar-logo-txt">Tech<span>cult</span></div>
+            <div class="sidebar-logo-sub">Event Portal</div>
+          </div>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-group-label">Main</div>
+        <div class="sidebar-item active" onclick="showDashSection('overview')">
+          <i class="fa-solid fa-gauge-high"></i> Dashboard
+        </div>
+        <div class="sidebar-item" onclick="showDashSection('events')">
+          <i class="fa-solid fa-calendar-days"></i> Events
+        </div>
+        <div class="sidebar-item" onclick="showDashSection('registered')">
+          <i class="fa-solid fa-list-check"></i> My Registrations
+        </div>
+        <div class="nav-group-label">Admin</div>
+        <div class="sidebar-item" onclick="openAdminAuthModal()">
+          <i class="fa-solid fa-circle-plus"></i> Create Event
+        </div>
+        <div class="nav-group-label">Preferences</div>
+        <div class="sidebar-item" onclick="toggleDark()">
+          <i class="fa-solid fa-moon" id="dm-icon-dash"></i>
+          <span id="dm-label-dash">Dark Mode</span>
+        </div>
+        <div class="sidebar-item logout" onclick="doLogout()">
+          <i class="fa-solid fa-right-from-bracket"></i> Logout
+        </div>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-card">
+          <div class="user-avatar" id="sidebar-avatar">JS</div>
+          <div class="user-info">
+            <div class="name" id="sidebar-name">John Student</div>
+            <div class="role">Student .</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="dash-main">
+      <header class="dash-header">
+        <button class="sidebar-toggle" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
+        <div class="dash-search">
+          <i class="fa-solid fa-search"></i>
+          <input type="text" id="dash-search" placeholder="Search events…" oninput="dashSearch()"/>
+        </div>
+        <div class="dash-header-right">
+          <div class="dm-btn" onclick="toggleDark()"><i class="fa-solid fa-moon" id="dm-icon-dash2"></i></div>
+          <div class="notif-btn"><i class="fa-solid fa-bell"></i><div class="notif-dot"></div></div>
+          <div class="header-user" id="header-avatar">JS</div>
+        </div>
+      </header>
+
+      <div class="dash-content">
+
+        <!-- OVERVIEW -->
+        <div id="dash-overview">
+          <div class="welcome-banner">
+            <div>
+              <div class="welcome-title" id="welcome-msg">Welcome back! 👋</div>
+              <div class="welcome-sub">Prof Ram Meghe College of Engineering and Management, Badnera</div>
+            </div>
+            <button class="btn-grad" onclick="showDashSection('events')">
+              <i class="fa-solid fa-calendar-plus"></i><span>Browse Events</span>
+            </button>
+          </div>
+          <div class="stats-row">
+            <div class="stat-card">
+              <div class="stat-icon si-p"><i class="fa-solid fa-calendar-days"></i></div>
+              <div><div class="stat-val" id="total-events-stat">10</div><div class="stat-lbl">Total Events</div></div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon si-b"><i class="fa-solid fa-check-circle"></i></div>
+              <div><div class="stat-val" id="reg-count-stat">0</div><div class="stat-lbl">My Registrations</div></div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon si-k"><i class="fa-solid fa-clock"></i></div>
+              <div><div class="stat-val">3</div><div class="stat-lbl">Upcoming Soon</div></div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon si-o"><i class="fa-solid fa-trophy"></i></div>
+              <div><div class="stat-val">10+</div><div class="stat-lbl">Total Prize Pool</div></div>
+            </div>
+          </div>
+          <div class="dash-section-head">
+            <div class="dash-section-title">Featured Events</div>
+          </div>
+          <div class="events-grid" id="dash-overview-grid"></div>
+        </div>
+
+        <!-- ALL EVENTS -->
+        <div id="dash-events" style="display:none">
+          <div class="dash-section-head">
+            <div class="dash-section-title">All Events</div>
+            <div class="filter-pills">
+              <button class="pill active" onclick="dashFilterCat('all',this)">All</button>
+              <button class="pill" onclick="dashFilterCat('competition',this)">Competition</button>
+              <button class="pill" onclick="dashFilterCat('workshop',this)">Workshop</button>
+              <button class="pill" onclick="dashFilterCat('seminar',this)">Seminar</button>
+              <button class="pill" onclick="dashFilterCat('gaming',this)">Gaming</button>
+            </div>
+          </div>
+          <div class="events-grid" id="dash-events-grid"></div>
+          <div id="dash-no-results" style="display:none;text-align:center;padding:50px 20px">
+            <i class="fa-solid fa-search" style="font-size:2rem;color:var(--txt3);opacity:0.3;display:block;margin-bottom:0.8rem"></i>
+            <p style="font-size:0.88rem;font-weight:500;color:var(--txt2)">No events match your search.</p>
+          </div>
+        </div>
+
+        <!-- MY REGISTRATIONS -->
+        <div id="dash-registered" style="display:none">
+          <div class="dash-section-head">
+            <div class="dash-section-title">My Registrations</div>
+          </div>
+          <div class="events-grid" id="dash-reg-grid"></div>
+          <div id="dash-no-reg" style="text-align:center;padding:70px 20px">
+            <i class="fa-solid fa-calendar-xmark" style="font-size:2.5rem;color:var(--txt3);opacity:0.25;display:block;margin-bottom:1rem"></i>
+            <p style="font-size:0.92rem;font-weight:600;color:var(--txt2);margin-bottom:0.4rem">No registrations yet</p>
+            <p style="font-size:0.82rem;color:var(--txt3);font-weight:400">Browse events and click Register Now to get started.</p>
+            <button class="btn-grad" style="margin-top:1.5rem" onclick="showDashSection('events')">
+              <i class="fa-solid fa-compass"></i><span>Explore Events</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <div id="toast"><i class="fa-solid fa-circle-check"></i><span id="toast-msg">Done!</span></div>
+
+  <!-- ════ REGISTRATION MODAL ════ -->
+  <div id="reg-modal" onclick="backdropClick(event)">
+    <div class="modal-wrapper">
+      <div class="modal-box">
+        <div class="modal-header-bar"></div>
+        <div class="modal-body">
+          <div class="modal-close" onclick="closeRegModal()"><i class="fa-solid fa-xmark"></i></div>
+          <div class="modal-event-preview">
+            <div class="modal-event-emoji" id="modal-event-emoji">🎉</div>
+            <div class="modal-event-info">
+              <h3 id="modal-event-name">Event Name</h3>
+              <div class="modal-event-meta-item"><i class="fa-solid fa-calendar"></i><span id="modal-event-date">-</span></div>
+              <div class="modal-event-meta-item"><i class="fa-solid fa-clock"></i><span id="modal-event-time">-</span></div>
+              <div class="modal-event-meta-item"><i class="fa-solid fa-location-dot"></i><span id="modal-event-venue">-</span></div>
+              <div class="modal-event-meta-item"><i class="fa-solid fa-trophy"></i><span id="modal-event-prize">-</span></div>
+              <div class="modal-event-meta-item"><i class="fa-solid fa-indian-rupee-sign"></i><span id="modal-event-price">-</span></div>
+            </div>
+          </div>
+          <div id="modal-step-1">
+            <div class="modal-step-title">Register for this Event</div>
+            <p class="modal-step-desc">Click <strong>Open Registration Form</strong> to fill your details on Google Form. After submitting, come back and confirm below.</p>
+            <div class="modal-actions">
+              <button class="btn-modal-cancel" onclick="closeRegModal()"><i class="fa-solid fa-xmark"></i> Cancel</button>
+              <button class="btn-grad" onclick="openGoogleForm()"><i class="fa-brands fa-google"></i><span>Open Registration Form</span></button>
+            </div>
+          </div>
+          <div id="modal-step-2" style="display:none">
+            <div class="success-icon">📋</div>
+            <div class="modal-step-title">Did you submit the form?</div>
+            <p class="modal-step-desc">The Google Form opened in a new tab. <strong>Fill and submit it completely</strong>, then click confirm below.</p>
+            <div class="modal-confirm-box">
+              <i class="fa-solid fa-circle-info"></i>
+              <p>Click <strong>"Yes, I Submitted"</strong> only after submitting the Google Form. Otherwise your registration won't be counted.</p>
+            </div>
+            <div class="modal-actions">
+              <button class="btn-modal-cancel" onclick="openGoogleForm()"><i class="fa-solid fa-arrow-left"></i> Go Back to Form</button>
+              <button class="btn-grad" onclick="confirmRegistration()"><i class="fa-solid fa-circle-check"></i><span>Yes, I Submitted</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ LOGIN REQUIRED MODAL ════ -->
+  <div id="login-required-modal" onclick="if(event.target.id==='login-required-modal')closeLoginPopup()">
+    <div class="login-req-box">
+      <div class="login-req-bar"></div>
+      <div class="login-req-body">
+        <div class="login-req-icon">🔐</div>
+        <div class="login-req-title">Login Required</div>
+        <p class="login-req-desc">You need to <strong>login first</strong> before registering for an event. Please sign in to your Techcult account to continue.</p>
+        <div class="login-req-actions">
+          <button class="btn-modal-cancel" onclick="closeLoginPopup()"><i class="fa-solid fa-xmark"></i> Cancel</button>
+          <button class="btn-grad" onclick="goToLogin()"><i class="fa-solid fa-right-to-bracket"></i><span>Login Now</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ ADMIN AUTH MODAL ════ -->
+  <div id="admin-auth-modal" onclick="if(event.target.id==='admin-auth-modal')closeAdminAuthModal()">
+    <div class="admin-auth-box">
+      <div class="modal-header-bar"></div>
+      <div class="admin-auth-body">
+        <div class="modal-close" onclick="closeAdminAuthModal()"><i class="fa-solid fa-xmark"></i></div>
+        <div class="admin-auth-icon">🔑</div>
+        <div class="admin-auth-title" id="admin-auth-title">Admin Access</div>
+        <p class="admin-auth-desc" id="admin-auth-desc">Enter admin credentials to create a new event.</p>
+        <div class="form-field" style="margin-bottom:1rem">
+          <label>Username</label>
+          <input type="text" id="admin-username" placeholder="Enter admin username" autocomplete="off"/>
+          <i class="fa-solid fa-user field-icon"></i>
+        </div>
+        <div class="form-field" style="margin-bottom:1rem">
+          <label>Password</label>
+          <input type="password" id="admin-password" placeholder="Enter admin password" autocomplete="off"/>
+          <i class="fa-solid fa-eye field-icon" id="admin-pwd-toggle" onclick="toggleAdminPwd()"></i>
+        </div>
+        <div class="login-error" id="admin-auth-error" style="display:none">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <span id="admin-auth-error-text">Invalid credentials.</span>
+        </div>
+        <div class="modal-actions" style="margin-top:1.4rem">
+          <button class="btn-modal-cancel" onclick="closeAdminAuthModal()"><i class="fa-solid fa-xmark"></i> Cancel</button>
+          <button class="btn-grad" id="admin-auth-verify-btn" onclick="verifyAdmin()"><i class="fa-solid fa-unlock"></i><span>Verify &amp; Continue</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ CREATE EVENT MODAL ════ -->
+  <div id="create-event-modal" onclick="if(event.target.id==='create-event-modal')closeCreateEventModal()">
+    <div class="create-event-box">
+      <div class="modal-header-bar"></div>
+      <div class="create-event-body">
+        <div class="modal-close" onclick="closeCreateEventModal()"><i class="fa-solid fa-xmark"></i></div>
+        <div class="create-event-title"><i class="fa-solid fa-calendar-plus"></i> Create New Event</div>
+
+        <div class="create-event-grid">
+          <div class="form-field">
+            <label>Event Name *</label>
+            <input type="text" id="ce-name" placeholder="e.g. Robotics Workshop"/>
+            <i class="fa-solid fa-tag field-icon"></i>
+          </div>
+          <div class="form-field">
+            <label>Category *</label>
+            <select id="ce-cat">
+              <option value="competition">Competition</option>
+              <option value="workshop">Workshop</option>
+              <option value="seminar">Seminar</option>
+              <option value="gaming">Gaming</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label>Emoji Icon</label>
+            <input type="text" id="ce-emoji" placeholder="🎯" maxlength="4"/>
+            <i class="fa-solid fa-face-smile field-icon"></i>
+          </div>
+          <div class="form-field">
+            <label>Date *</label>
+            <input type="date" id="ce-date"/>
+            <i class="fa-solid fa-calendar field-icon"></i>
+          </div>
+          <div class="form-field">
+            <label>Time *</label>
+            <input type="text" id="ce-time" placeholder="e.g. 10:00 AM – 1:00 PM"/>
+            <i class="fa-solid fa-clock field-icon"></i>
+          </div>
+          <div class="form-field">
+            <label>Venue *</label>
+            <input type="text" id="ce-venue" placeholder="e.g. CSE Lab 101"/>
+            <i class="fa-solid fa-location-dot field-icon"></i>
+          </div>
+          <div class="form-field">
+            <label>Prize</label>
+            <input type="text" id="ce-prize" placeholder="e.g. Certificate + ₹1000"/>
+            <i class="fa-solid fa-trophy field-icon"></i>
+          </div>
+          <div class="form-field">
+            <label>Seats *</label>
+            <input type="number" id="ce-seats" placeholder="e.g. 50" min="1"/>
+            <i class="fa-solid fa-users field-icon"></i>
+          </div>
+          <div class="form-field">
+  <label>Price *</label>
+  <input type="text" id="ce-price" placeholder="e.g. ₹100 or Free"/>
+  <i class="fa-solid fa-indian-rupee-sign field-icon"></i>
+</div>
+          <div class="form-field ce-full">
+            <label>Description *</label>
+            <textarea id="ce-desc" placeholder="Describe the event in a few sentences…" rows="3"></textarea>
+          </div>
+          <div class="form-field ce-full">
+            <label>Google Form Link</label>
+            <input type="url" id="ce-form" placeholder="https://docs.google.com/forms/…"/>
+            <i class="fa-brands fa-google field-icon"></i>
+          </div>
+        </div>
+
+        <div class="login-error" id="ce-error" style="display:none">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <span id="ce-error-text">Please fill all required fields.</span>
+        </div>
+
+        <div class="modal-actions" style="margin-top:1.6rem">
+          <button class="btn-modal-cancel" onclick="closeCreateEventModal()"><i class="fa-solid fa-xmark"></i> Cancel</button>
+          <button class="btn-grad" onclick="saveNewEvent()"><i class="fa-solid fa-circle-plus"></i><span>Create Event</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

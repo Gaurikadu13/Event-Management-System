@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Techcult — Prof Ram Meghe College of Engineering and Management, Badnera</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <!--NAVBAR -->
+
+  <nav class="navbar" id="navbar">
+    <!-- Logo -->
+    <a class="nav-logo" href="index.html">
+      <div class="nav-logo-icon"><i class="fa-solid fa-bolt-lightning"></i></div>
+      <div class="nav-logo-text">Tech<span>cult</span></div>
+    </a>
+
+    <!-- Desktop Links -->
+    <ul class="nav-links">
+      <li><a class="active" onclick="scrollSec(0)">Home</a></li>
+      <li><a onclick="scrollSec('events-sec')">Events</a></li>
+      <li><a onclick="scrollSec('about-sec')">About</a></li>
+      <li><a onclick="scrollSec('contact-sec')">Contact</a></li>
+      <li><a href="login.html" class="nav-login">Login</a></li>
+    </ul>
+
+    <!-- Actions -->
+    <div class="nav-actions">
+      <div class="dm-btn" onclick="toggleDark()" title="Toggle theme">
+        <i class="fa-solid fa-moon" id="dm-icon"></i>
+      </div>
+      <div class="hamburger" onclick="toggleMobile()" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a onclick="scrollSec(0)">Home</a>
+    <a onclick="scrollSec('events-sec')">Events</a>
+    <a onclick="scrollSec('about-sec')">About</a>
+    <a onclick="scrollSec('contact-sec')">Contact</a>
+    <a href="login.html" style="color:#a78bfa;font-weight:600">Login →</a>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       HERO SECTION
+  ════════════════════════════════════════════ -->
+  <section class="hero" id="hero-sec">
+    <!-- Animated gradient background -->
+    <div class="hero-bg"></div>
+    <!-- Mesh grid overlay -->
+    <div class="hero-grid"></div>
+
+    <!-- Background orbs -->
+    <div class="orb orb-p" style="width:500px;height:500px;top:-100px;right:-100px;opacity:0.6"></div>
+    <div class="orb orb-b" style="width:400px;height:400px;bottom:-50px;left:-80px;opacity:0.5"></div>
+    <div class="orb orb-k" style="width:300px;height:300px;top:50%;left:50%;transform:translate(-50%,-50%);opacity:0.3"></div>
+
+    <!-- Hero Content -->
+    <div class="hero-content">
+      <div class="hero-badge">
+        <i class="fa-solid fa-star-of-life"></i>
+        <span><a href="https://prmceam.ac.in/" target="_blank">PRMCEAM</a></span>
+      </div>
+
+      <h1 class="hero-title">
+        Welcome to<br/>
+        <span class="grad-txt">Techcult</span>
+      </h1>
+
+      <p class="hero-college">
+        <i class="fa-solid fa-university" style="color:#a78bfa;margin-right:8px"></i>
+        Prof Ram Meghe College of Engineering and Management, Badnera<br/>
+        <span style="font-size:0.88rem;opacity:0.7">Discover · Register · Compete · Win</span>
+      </p>
+
+      <div class="hero-buttons">
+        <button class="btn-grad" onclick="scrollSec('events-sec')">
+          <i class="fa-solid fa-compass"></i>
+          <span>Explore Events</span>
+        </button>
+        <a href="login.html" class="btn-out">
+          <i class="fa-solid fa-right-to-bracket"></i>
+          Login to Portal
+        </a>
+      </div>
+
+      <!-- Stats row -->
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">10+</div>
+          <div class="stat-label">Events</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <div class="stat-num">500+</div>
+          <div class="stat-label">Participants</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <div class="stat-num">10+</div>
+          <div class="stat-label">Prizes</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <div class="stat-num">20+</div>
+          <div class="stat-label">Experts</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+       EVENTS SECTION
+  ════════════════════════════════════════════ -->
+  <section class="events-section" id="events-sec">
+    <!-- Ambient orb -->
+    <div class="orb orb-p" style="width:600px;height:600px;top:0;right:-200px;opacity:0.06;filter:blur(120px)"></div>
+
+    <!-- Section header -->
+    <div class="section-header reveal">
+      <div class="s-eyebrow">
+        <i class="fa-solid fa-calendar-star"></i>
+        Upcoming Events
+      </div>
+      <h2 class="s-title">Flagship <span class="grad-txt">Techcult</span> Events</h2>
+      <p class="s-desc">10 premier competitions, workshops & seminars — built to challenge your mind and accelerate your career.</p>
+    </div>
+
+    <!-- Search and filter bar -->
+    <div class="filter-bar reveal">
+      <div class="search-box">
+        <i class="fa-solid fa-search"></i>
+        <input type="text" id="ev-search" placeholder="Search events by name, venue…" oninput="filterEvents()"/>
+      </div>
+      <div class="filter-pills">
+        <button class="pill active" onclick="filterCat('all', this)">All</button>
+        <button class="pill" onclick="filterCat('competition', this)">Competition</button>
+        <button class="pill" onclick="filterCat('workshop', this)">Workshop</button>
+        <button class="pill" onclick="filterCat('seminar', this)">Seminar</button>
+        <button class="pill" onclick="filterCat('gaming', this)">Gaming</button>
+      </div>
+    </div>
+
+    <!-- Events grid — populated by script.js -->
+    <div class="events-grid" id="home-events-grid"></div>
+
+    <!-- Empty state -->
+    <div id="no-events" style="display:none;text-align:center;padding:60px 20px">
+      <i class="fa-solid fa-search" style="font-size:2.5rem;color:var(--txt3);opacity:0.4;display:block;margin-bottom:1rem"></i>
+      <p style="color:var(--txt2);font-size:0.9rem;font-weight:500">No events found. Try a different search.</p>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+       ABOUT SECTION
+  ════════════════════════════════════════════ -->
+  <section class="about-section" id="about-sec">
+    <div class="orb orb-k" style="width:500px;height:500px;left:-100px;top:0;opacity:0.07;filter:blur(100px)"></div>
+
+    <div class="about-grid">
+      <!-- Visual -->
+      <div class="about-visual reveal">
+        <div class="about-card">
+          <div class="about-icon-grid">
+            <div class="about-icon-item"><i class="fa-solid fa-code"></i><span>Coding</span></div>
+            <div class="about-icon-item"><i class="fa-solid fa-robot"></i><span>AI / ML</span></div>
+            <div class="about-icon-item"><i class="fa-solid fa-lightbulb"></i><span>Innovation</span></div>
+            <div class="about-icon-item"><i class="fa-solid fa-trophy"></i><span>Compete</span></div>
+            <div class="about-icon-item"><i class="fa-solid fa-users"></i><span>Network</span></div>
+            <div class="about-icon-item"><i class="fa-solid fa-rocket"></i><span>Launch</span></div>
+          </div>
+        </div>
+        <!-- Floating badge -->
+        <div class="about-float-badge">
+          <div class="num">15+</div>
+          <div class="lbl">Yrs of Excellence</div>
+        </div>
+      </div>
+
+      <!-- Text -->
+      <div class="about-text reveal d2">
+        <div class="s-eyebrow"><i class="fa-solid fa-circle-info"></i> About Techcult</div>
+        <h2 class="s-title">Where <span class="grad-txt">Talent</span> Meets<br/>Opportunity</h2>
+        <p class="s-desc">Techcult is the premier community of Prof Ram Meghe College of Engineering and Management, Badnera — uniting students, faculty and technologies!!
+        <div class="feature-list">
+          <div class="feature-item">
+            <div class="feature-icon"><i class="fa-solid fa-bolt-lightning"></i></div>
+            <div class="feature-text">
+              <h4>Intense Competitions</h4>
+              <p>Hackathons, coding contests, debugging battles and design challenges that push boundaries.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon"><i class="fa-solid fa-microphone-lines"></i></div>
+            <div class="feature-text">
+              <h4>Expert-Led Workshops</h4>
+              <p>Hands-on sessions on AI/ML, cloud computing, cybersecurity and emerging technologies.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon"><i class="fa-solid fa-handshake"></i></div>
+            <div class="feature-text">
+              <h4>Industry Networking</h4>
+              <p>Connect with recruiters, founders and engineers from India's top tech companies.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+       CONTACT SECTION
+  ════════════════════════════════════════════ -->
+  <section class="contact-section" id="contact-sec">
+    <div class="orb orb-b" style="width:500px;height:500px;right:-100px;bottom:0;opacity:0.07;filter:blur(100px)"></div>
+
+    <div class="section-header reveal">
+      <div class="s-eyebrow"><i class="fa-solid fa-envelope-open-text"></i> Contact</div>
+      <h2 class="s-title">Get in <span class="grad-txt">Touch</span></h2>
+      <p class="s-desc">Have a question about events? We'd love to hear from you.</p>
+    </div>
+
+    <div class="contact-grid">
+      <!-- Info -->
+      <div class="reveal">
+        <div class="contact-info-item">
+          <div class="contact-ico"><i class="fa-solid fa-location-dot"></i></div>
+          <div>
+            <h4>Address</h4>
+            <p>Prof Ram Meghe College of Engineering and Management, Badnera, Amravati — 444701</p>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-ico"><i class="fa-solid fa-phone"></i></div>
+          <div><h4>Phone</h4><p>+91 98765 43210</p></div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-ico"><i class="fa-solid fa-envelope"></i></div>
+          <div><h4>Email</h4><p><a href="principal@prmceam.ac.in" class="__cf_email__" data-cfemail="295d4c4a414a5c455d69595b444a4c484407484a074047">principal@prmceam.ac.in</a></p></div>
+        </div>
+        <div class="social-links" style="margin-top:0.5rem">
+          <a><i class="fa-brands fa-instagram"></i></a>
+          <a><i class="fa-brands fa-twitter"></i></a>
+          <a><i class="fa-brands fa-linkedin-in"></i></a>
+          <a><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <div class="contact-form reveal d2">
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" id="firstName" placeholder="John"/>
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" id="lastName" placeholder="Doe"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="email" placeholder="you@example.com"/>
+        </div>
+        <div class="form-group">
+          <label>Subject</label>
+          <input type="text" id="subject" placeholder="Event inquiry, sponsorship…"/>
+
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea id="message" placeholder="Tell us how we can help…"></textarea>
+        </div>
+        <button class="btn-grad" style="width:100%;justify-content:center;padding:14px;border-radius:12px;font-size:0.9rem" onclick="sendToWhatsApp()">
+          <i class="fa-solid fa-paper-plane"></i>
+          <span>Send Message</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+       FOOTER
+  ════════════════════════════════════════════ -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="nav-logo" href="index.html" style="margin-bottom:0.5rem">
+          <div class="nav-logo-icon"><i class="fa-solid fa-bolt-lightning"></i></div>
+          <div class="nav-logo-text">Tech<span>cult</span></div>
+        </a>
+        <p>Annual Technical Festival of<br/>
+        <strong style="color:var(--txt2)">Prof Ram Meghe College of Engineering and Management, Badnera</strong></p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a onclick="scrollSec(0)">Home</a></li>
+          <li><a onclick="scrollSec('events-sec')">Events</a></li>
+          <li><a onclick="scrollSec('about-sec')">About</a></li>
+          <li><a href="login.html">Dashboard</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a>Badnera, Amravati — 444701</a></li>
+          <li><a><span class="__cf_email__" data-cfemail="f48091979c97819880b484869997919599da9597da9d9a">principal@prmceam.ac.in</span></a></li>
+          <li><a>+91 98765 43210</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Techcult · Prof Ram Meghe College of Engineering and Management, Badnera</span>
+      <div class="social-links">
+        <a><i class="fa-brands fa-instagram"></i></a>
+        <a><i class="fa-brands fa-twitter"></i></a>
+        <a><i class="fa-brands fa-linkedin-in"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast -->
+  <div id="toast">
+    <i class="fa-solid fa-circle-check"></i>
+    <span id="toast-msg">Done!</span>
+  </div>
+
+  <!-- ════ REGISTRATION MODAL ════ -->
+  <div id="reg-modal" onclick="backdropClick(event)">
+    <div class="modal-wrapper">
+      <div class="modal-box">
+        <div class="modal-header-bar"></div>
+        <div class="modal-body">
+          <div class="modal-close" onclick="closeRegModal()"><i class="fa-solid fa-xmark"></i></div>
+          <div class="modal-event-preview">
+            <div class="modal-event-emoji" id="modal-event-emoji">🎉</div>
+            <div class="modal-event-info">
+              <h3 id="modal-event-name">Event Name</h3>
+              <div class="modal-event-meta-item"><i class="fa-solid fa-calendar"></i><span id="modal-event-date">-</span></div>
+              <div class="modal-event-meta-item"><i class="fa-solid fa-clock"></i><span id="modal-event-time">-</span></div>
+              <div class="modal-event-meta-item"><i class="fa-solid fa-location-dot"></i><span id="modal-event-venue">-</span></div>
+              <div class="modal-event-meta-item"><i class="fa-solid fa-trophy"></i><span id="modal-event-prize">-</span></div>
+              <div class="modal-event-meta-item"><i class="fa-solid fa-indian-rupee-sign"></i><span id="modal-event-price">-</span></div>
+            </div>
+          </div>
+          <!-- STEP 1: Open Form -->
+          <div id="modal-step-1">
+            <div class="modal-step-title">Register for this Event</div>
+            <p class="modal-step-desc">Click <strong>Open Registration Form</strong> to fill your details on Google Form. After submitting, come back and confirm below.</p>
+            <div class="modal-actions">
+              <button class="btn-modal-cancel" onclick="closeRegModal()"><i class="fa-solid fa-xmark"></i> Cancel</button>
+              <button class="btn-grad" onclick="openGoogleForm()"><i class="fa-brands fa-google"></i><span>Open Registration Form</span></button>
+            </div>
+          </div>
+          <!-- STEP 2: Confirm -->
+          <div id="modal-step-2" style="display:none">
+            <div class="success-icon">📋</div>
+            <div class="modal-step-title">Did you submit the form?</div>
+            <p class="modal-step-desc">The Google Form opened in a new tab. <strong>Fill and submit it completely</strong>, then click confirm below.</p>
+            <div class="modal-confirm-box">
+              <i class="fa-solid fa-circle-info"></i>
+              <p>Click <strong>"Yes, I Submitted"</strong> only after you have submitted the Google Form. Otherwise your registration won't be counted.</p>
+            </div>
+            <div class="modal-actions">
+              <button class="btn-modal-cancel" onclick="openGoogleForm()"><i class="fa-solid fa-arrow-left"></i> Go Back to Form</button>
+              <button class="btn-grad" onclick="confirmRegistration()"><i class="fa-solid fa-circle-check"></i><span>Yes, I Submitted</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ LOGIN REQUIRED MODAL ════ -->
+  <div id="login-required-modal" onclick="if(event.target.id==='login-required-modal')closeLoginPopup()">
+    <div class="login-req-box">
+      <div class="login-req-bar"></div>
+      <div class="login-req-body">
+        <div class="login-req-icon">🔐</div>
+        <div class="login-req-title">Login Required</div>
+        <p class="login-req-desc">You need to <strong>login first</strong> before registering for an event. Please sign in to your Techcult account to continue.</p>
+        <div class="login-req-actions">
+          <button class="btn-modal-cancel" onclick="closeLoginPopup()"><i class="fa-solid fa-xmark"></i> Cancel</button>
+          <button class="btn-grad" onclick="goToLogin()"><i class="fa-solid fa-right-to-bracket"></i><span>Login Now</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="script.js"></script>
+  <script>
+
+function sendToWhatsApp() {
+
+  var firstName = document.getElementById("firstName").value;
+  var lastName = document.getElementById("lastName").value;
+  var email = document.getElementById("email").value;
+  var subject = document.getElementById("subject").value;
+  var message = document.getElementById("message").value;
+
+  // ✅ Validation
+  if(firstName === "" || email === "" || message === ""){
+    showToast("⚠️ Please fill all required fields");
+    return;
+  }
+
+  var phoneNumber = "919699378314"; // 👉 your number
+
+  var text = "Name: " + firstName + " " + lastName +
+             "%0AEmail: " + email +
+             "%0ASubject: " + subject +
+             "%0AMessage: " + message;
+
+  var url = "https://wa.me/" + phoneNumber + "?text=" + text;
+
+  window.open(url, "_blank");
+
+  // ✅ CLEAR FORM
+  document.getElementById("firstName").value = "";
+  document.getElementById("lastName").value = "";
+  document.getElementById("email").value = "";
+  document.getElementById("subject").value = "";
+  document.getElementById("message").value = "";
+
+  // ✅ SHOW TOAST MESSAGE
+  setTimeout(() => {
+    showToast("✅ Message Sent Successfully!");
+  }, 300);
+}
+</script>
+</body>
+</html>
